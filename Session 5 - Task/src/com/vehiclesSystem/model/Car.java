@@ -2,8 +2,6 @@ package com.vehiclesSystem.model;
 
 import lombok.*;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.context.WebApplicationContext;
 
 @NoArgsConstructor
 @AllArgsConstructor

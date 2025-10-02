@@ -15,6 +15,8 @@ public class BikeController {
         BikeService bikeService = (BikeService) context.getBean("bikeService");
         bikeService.saveBike(new Bike("id3", "brand", Type.BIKE));
 
+        Bike bike = bikeService.getBikeById("id3");
+
         context.close();
 
     }

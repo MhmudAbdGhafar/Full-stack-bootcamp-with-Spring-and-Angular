@@ -14,7 +14,7 @@ public class CarController {
 
         CarService carService = (CarService) context.getBean("carService");
 
-//        carService.saveCar(new Car("id7", "brand", Type.CAR));
+        carService.saveCar(new Car("id8", "brand", Type.CAR));
 
         Car car = carService.getCarById("id3");
 

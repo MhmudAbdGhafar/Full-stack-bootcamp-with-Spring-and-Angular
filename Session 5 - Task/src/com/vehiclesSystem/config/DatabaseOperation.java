@@ -35,7 +35,7 @@ public class DatabaseOperation {
 
             Statement st = con.createStatement();
 
-            String query = getInsertQuery(vehicle);
+            String query = "INSERT INTO vehicles (id, brand, type) VALUES (?, ?, ?)";
 
             try (PreparedStatement pstmt = con.prepareStatement(query)) {
 
@@ -43,8 +43,7 @@ public class DatabaseOperation {
                 pstmt.setString(2, vehicle.getBrand());
                 pstmt.setString(3, String.valueOf(vehicle.getType()));
 
-                int rowsInserted = pstmt.executeUpdate();
-                System.out.println("✅ Rows inserted: " + rowsInserted);
+                System.out.println("✅ New row inserted: ");
             }
 
         }catch (Exception e){
@@ -55,82 +54,13 @@ public class DatabaseOperation {
 
     public Vehicle getVehicleById(String id) {
 
-        if(search(Type.CAR, id) != null){
-            Car car = (Car)search(Type.CAR, id);
-
-            System.out.println("✅ User found: " + car.toString());
-
-            return car;
-        }
-        else if(search(Type.BIKE, id) != null){
-            Bike bike = (Bike)search(Type.BIKE, id);
-
-            System.out.println("✅ User found: " + bike.toString());
-
-            return bike;
-        }
-        else if (search(Type.PLANE, id) != null){
-            Plane plane = (Plane)search(Type.PLANE, id);
-
-            System.out.println("✅ User found: " + plane.toString());
-
-            return plane;
-        }
-
-        System.out.println("⚠️ No user found with ID: " + id);
-
-        return null;
-    }
-
-    private static String getInsertQuery(Vehicle vehicle) {
-
-        if (vehicle.getType().equals(Type.CAR)) {
-            return "INSERT INTO car (id, brand, type) VALUES (?, ?, ?)";
-        }
-
-        if (vehicle.getType().equals(Type.PLANE)) {
-            return "INSERT INTO plane (id, brand, type) VALUES (?, ?, ?)";
-        }
-
-        return "INSERT INTO bike (id, brand, type) VALUES (?, ?, ?)";
-
-    }
-
-    private static String getSearchQuery(Vehicle vehicle) {
-
-        if(vehicle.getType().equals(Type.CAR)) {
-            return "SELECT * FROM car WHERE id = ?";
-        }
-
-        if(vehicle.getType().equals(Type.PLANE)) {
-            return "SELECT * FROM plane WHERE id = ?";
-        }
-
-        return "SELECT * FROM bike WHERE id = ?";
-
-    }
-
-    private Vehicle search(Type type, String id) {
-
-        Vehicle vehicle = null;
-
         try {
 
             Connection con = DriverManager.getConnection(url, username, password);
 
             Statement st = con.createStatement();
 
-            String query;
-
-            if (type.equals(Type.CAR)) {
-                query = getSearchQuery(new Car());
-            }
-            else if (type.equals(Type.PLANE)) {
-                query = getSearchQuery(new Plane());
-            }
-            else {
-                query = getSearchQuery(new Bike());
-            }
+            String query = "SELECT * FROM vehicles WHERE id = ?";
 
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, id);
@@ -143,28 +73,36 @@ public class DatabaseOperation {
                 String vehicleBrand = rs.getString("brand");
                 String vehicleType = rs.getString("type");
 
-                if (vehicleType.equals(String.valueOf(Type.CAR))) {
+                if(vehicleType.equals(String.valueOf(Type.CAR))){
+
                     Car car = new Car();
                     car.setId(vehicleId);
                     car.setBrand(vehicleBrand);
 
-                    vehicle = car;
+                    System.out.println("✅ User found: " + car.toString());
+
+                    return car;
                 }
-                else if (vehicleType.equals(String.valueOf(Type.PLANE))) {
+                else if(vehicleType.equals(String.valueOf(Type.PLANE))){
+
                     Plane plane = new Plane();
                     plane.setId(vehicleId);
                     plane.setBrand(vehicleBrand);
 
-                    vehicle = plane;
+                    System.out.println("✅ User found: " + plane.toString());
+
+                    return plane;
                 }
-                else {
+                else if(vehicleType.equals(String.valueOf(Type.BIKE))){
+
                     Bike bike = new Bike();
                     bike.setId(vehicleId);
                     bike.setBrand(vehicleBrand);
 
-                    vehicle = bike;
-                }
+                    System.out.println("✅ User found: " + bike.toString());
 
+                    return bike;
+                }
             }
 
             rs.close();
@@ -173,7 +111,8 @@ public class DatabaseOperation {
             e.printStackTrace();
         }
 
-        return vehicle;
+
+        return null;
     }
 
     @PostConstruct

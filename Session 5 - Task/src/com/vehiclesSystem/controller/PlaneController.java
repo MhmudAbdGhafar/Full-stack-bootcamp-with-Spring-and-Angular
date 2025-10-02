@@ -14,7 +14,7 @@ public class PlaneController {
 
         PlaneService planeService = (PlaneService) context.getBean("planeService");
 
-//        planeService.savePlane(new Plane("id4", "brand", Type.PLANE));
+        planeService.savePlane(new Plane("id9", "brand", Type.PLANE));
 
         Plane plane = planeService.getPlaneById("id");
 
