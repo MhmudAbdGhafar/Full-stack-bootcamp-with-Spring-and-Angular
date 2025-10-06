@@ -1,21 +1,11 @@
 package com.vehiclesSystem.model;
 
-import lombok.*;
 import org.springframework.context.annotation.Scope;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-@ToString
 @Scope("prototype")
-public class Car implements Vehicle {
+public class Car extends Vehicle {
 
-    private String id;
-
-    private String brand;
-
-    private Type type = Type.CAR;
-
-
+    public Car(String id, String brand, Type type) {
+        super(id, brand, type);
+    }
 }

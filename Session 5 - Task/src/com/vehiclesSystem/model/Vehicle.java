@@ -1,10 +1,20 @@
 package com.vehiclesSystem.model;
 
-public interface Vehicle {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-    Type getType();
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public abstract class Vehicle {
 
-    String getBrand();
+    private String id;
 
-    String getId();
+    private String brand;
+
+    private Type type;
+
 }
