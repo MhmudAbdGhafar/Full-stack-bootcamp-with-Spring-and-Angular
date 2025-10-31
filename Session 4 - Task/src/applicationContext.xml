@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Define your beans here -->
+
+    <bean id="draw2DShape" class="com.bean.scopes_lifecycle.Draw2DShape"> </bean>
+
+    <bean id="draw3DShape" class="com.bean.scopes_lifecycle.Draw3DShape"> </bean>
+
+    <bean id="circle" class="com.bean.scopes_lifecycle.Circle">
+        <constructor-arg ref="draw2DShape"> </constructor-arg>
+        <constructor-arg ref="draw3DShape"> </constructor-arg>
+    </bean>
+
+    <bean id="rectangle" class="com.bean.scopes_lifecycle.Rectangle" scope="prototype">
+        <property name="draw2DShape" ref="draw2DShape"> </property>
+        <property name="draw3DShape" ref="draw3DShape"> </property>
+    </bean>
+
+    <bean id="init" class="com.bean.scopes_lifecycle.DatabaseOperation" init-method="connectToDatabase" destroy-method="disconnectFromDatabase"> </bean>
+</beans>
+
+
+
+
+
