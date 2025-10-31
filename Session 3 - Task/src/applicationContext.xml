@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Define your beans here -->
+
+    <!--    Task 1 beans-->
+
+    <bean id="circle" class="com.ioc.example.task1.Circle">
+        <constructor-arg ref="draw2dShape"> </constructor-arg>
+        <constructor-arg ref="draw3dShape"> </constructor-arg>
+    </bean>
+
+    <bean id="square" class="com.ioc.example.task1.Square">
+        <property name="draw2dShape" ref="draw2dShape"> </property>
+        <property name="draw3dShape" ref="draw3dShape"> </property>
+    </bean>
+
+    <bean id="draw2dShape" class="com.ioc.example.task1.Draw2dShape"> </bean>
+
+    <bean id="draw3dShape" class="com.ioc.example.task1.Draw3dShape"> </bean>
+
+
+    <!--    Task 2 beans-->
+
+    <bean id="car" class="com.ioc.example.task2.Car">
+        <constructor-arg ref="databaseOperation"> </constructor-arg>
+    </bean>
+
+    <bean id="plane" class="com.ioc.example.task2.Plane" >
+        <property name="databaseOperation" ref="databaseOperation" > </property>
+    </bean>
+
+    <bean id="databaseOperation" class="com.ioc.example.task2.DatabaseOperation">
+        <property name="url" value="${database.url}"> </property>
+        <property name="username" value="${database.username}"> </property>
+        <property name="password" value="${database.password}"> </property>
+    </bean>
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+</beans>
