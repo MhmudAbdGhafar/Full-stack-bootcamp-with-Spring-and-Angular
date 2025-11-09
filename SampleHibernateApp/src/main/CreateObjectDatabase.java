@@ -1,0 +1,40 @@
+package main;
+
+import main.com.myApp.controller.model.Student;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class CreateObjectDatabase
+{
+    public static void main(String[] args) {
+        // define the Session factory
+        SessionFactory sessionFactory = new Configuration()
+                .configure("hibernate-config.xml")
+                .addAnnotatedClass(Student.class)
+                .buildSessionFactory();
+
+        //define session
+        Session session = sessionFactory.getCurrentSession();
+
+        try {
+
+            //open the transaction
+            session.beginTransaction();
+
+            Student student = new Student("Mahmoud", "Abdul Ghaffar");
+
+            session.save(student);
+
+            //commit the changes
+            session.getTransaction().commit();
+
+        }catch (Exception exception)
+        {
+            exception.printStackTrace();
+        }finally {
+            session.close();
+        }
+
+    }
+}
