@@ -1,7 +1,7 @@
 package main;
 
-import entity.Answer;
-import entity.Question;
+import entity.Course;
+import entity.Instructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,8 +16,8 @@ public class OneToManyBiDirectionalMain {
 
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate-config.xml")
-                .addAnnotatedClass(Question.class)
-                .addAnnotatedClass(Answer.class)
+                .addAnnotatedClass(Instructor.class)
+                .addAnnotatedClass(Course.class)
                 .buildSessionFactory();
 
         Session session = sessionFactory.getCurrentSession();
@@ -26,28 +26,26 @@ public class OneToManyBiDirectionalMain {
 
             session.beginTransaction();
 
-            Question question = new Question("question1");
+            Instructor instructor = new Instructor("instructor1");
 
-            List<Answer> answers = new ArrayList<Answer>();
+            List<Course> courses = new ArrayList<>();
 
-            Collections.addAll(answers,
-                    new Answer("question1 first answer"),
-                    new Answer("question1 second answer"));
+            Collections.addAll(courses,
+                    new Course("instructor1 first course"),
+                    new Course("instructor1 second course"));
 
-            question.setAnswers(answers);
+            instructor.setCourseList(courses);
 
-            session.save(question);
+            session.persist(instructor);
+
+            session.getTransaction().commit();
 
         }catch(Exception e){
             e.printStackTrace();
         }
         finally {
-
-            session.getTransaction().commit();
-
             session.close();
             sessionFactory.close();
-
         }
     }
 }

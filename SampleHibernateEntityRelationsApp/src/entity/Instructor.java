@@ -16,12 +16,14 @@ public class Instructor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "instructor_name")
     private String instructorName;
 
     @OneToMany(mappedBy = "instructor")
-    private List<Course> courses;
+    private List<Course> courseList;
 
     public Instructor(String instructorName) {
         this.instructorName = instructorName;
