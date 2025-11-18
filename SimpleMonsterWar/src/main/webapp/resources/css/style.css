@@ -1,18 +1,98 @@
-.error {
-    color: red;
+/* style.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+h2 {
+    text-align: center;
+    color: #333;
+}
+p a {
+    color: #008CBA;
+    text-decoration: none;
+}
+p a:hover {
+    text-decoration: underline;
 }
 
-
-
-
-.table-div {
-    position: absolute;
-    top: 70%;
-    left: 35%;
-    transform: translate(-30%, -30%);
+/* Table Styles (for list-products.jsp) */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+    color: #333;
 }
 
-.test
-{
-    color: #20c997;
+/* Button/Link Styles */
+.button {
+    padding: 8px 15px;
+    margin: 5px 2px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+.add-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.update-button {
+    background-color: #008CBA; /* Blue */
+    color: white;
+}
+.delete-button {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Full width for the form submit button */
+}
+
+/* Form Styles (for product-form.jsp) */
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #008CBA;
+    outline: none;
 }

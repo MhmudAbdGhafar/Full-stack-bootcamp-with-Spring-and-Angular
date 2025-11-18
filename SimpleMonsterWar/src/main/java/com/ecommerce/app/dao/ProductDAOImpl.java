@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,18 +16,22 @@ public class ProductDAOImpl implements ProductDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    @Transactional
-    public Product insert(Product product) {
+    public List<Product> listProducts() {
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        return currentSession.createQuery("from Product", Product.class).list();
+    }
+
+    @Override
+    public void saveProduct(Product product) {
 
         Session currentSession = sessionFactory.getCurrentSession();
 
         currentSession.persist(product);
-
-        return product;
     }
 
     @Override
-    @Transactional
     public Product findById(int id) {
 
         Session currentSession = sessionFactory.getCurrentSession();
@@ -37,47 +40,12 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    @Transactional
-    public Product deleteById(int id) {
+    public void deleteProduct(int id) {
 
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query theQuery =
-                currentSession.createQuery("delete from Product where id=:productId");
+        Product theProduct = findById(id);
 
-        theQuery.setParameter("productId", id);
-
-        // Retrieve the product that will be deleted
-        Product product = currentSession.get(Product.class, id);
-
-        theQuery.executeUpdate();
-
-        return product;
-    }
-
-    @Override
-    @Transactional
-    public Product update(Product product) {
-
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        // Save or update the product (Hibernate handles the merge/persist logic)
-        currentSession.update(product);
-
-        return product;
-    }
-
-    @Override
-    @Transactional
-    public List<Product> findAll() {
-
-        Session currentSession = sessionFactory.getCurrentSession();
-
-        Query<Product> theQuery =
-                currentSession.createQuery("from Product order by name", Product.class);
-
-        List<Product> products = theQuery.getResultList();
-
-        return products.isEmpty() ? null : products;
+        currentSession.remove(theProduct);
     }
 }

@@ -1,5 +1,8 @@
 package com.ecommerce.app.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,16 +22,21 @@ public class ProductDetails {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Name is required")
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "Expiration date is required")
     @Temporal(TemporalType.DATE)
     @Column(name = "expiration_date")
     private Date expirationDate;
 
+    @NotBlank(message = "Manufacturer is required")
     @Column(name = "manufacturer")
     private String manufacturer;
 
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be positive")
     @Column(name = "price")
     private Double price;
 
