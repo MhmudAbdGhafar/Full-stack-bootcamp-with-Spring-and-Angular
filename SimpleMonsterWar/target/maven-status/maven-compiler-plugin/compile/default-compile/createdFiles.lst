@@ -1,7 +1,0 @@
-com\ecommerce\app\service\ProductService.class
-com\ecommerce\app\dao\ProductDAOImpl.class
-com\ecommerce\app\model\Product.class
-com\ecommerce\app\controller\ProductController.class
-com\ecommerce\app\model\ProductDetails.class
-com\ecommerce\app\dao\ProductDAO.class
-com\ecommerce\app\service\ProductServiceImpl.class
