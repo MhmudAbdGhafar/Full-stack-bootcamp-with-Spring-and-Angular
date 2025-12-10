@@ -1,0 +1,125 @@
+/* ====== COLOR THEME (TWO COLORS ONLY) ====== */
+:root {
+    --primary: #0077B5;   /* LinkedIn Blue 0A66C2 */
+    --secondary: #E8F3FC; /* Soft Light Blue */
+}
+
+/* ====== GENERAL PAGE STYLE ====== */
+body {
+    background: var(#F5F5DC);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ====== CARD STYLE ====== */
+.card {
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+    background: #F0F8FF;
+}
+
+.card-header {
+    background: var(--primary) !important;
+    color: white !important;
+    border-radius: 10px 10px 0 0;
+}
+
+/* ====== BUTTONS ====== */
+.btn-primary {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover {
+    background: #08529A !important;
+}
+
+/* Secondary actions */
+.btn-secondary, .btn-info, .btn-success, .btn-warning {
+    background: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+    color: #0077B5 !important;
+}
+
+.btn-secondary:hover,
+.btn-info:hover,
+.btn-success:hover,
+.btn-warning:hover {
+    background: #d6e9fa !important;
+}
+
+/* delete button stays red */
+.btn-danger {
+    background: #E63946 !important;
+    border-color: #E63946 !important;
+}
+
+/* ====== TABLE ====== */
+.table thead {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.table tbody tr:hover {
+    background: var(--secondary);
+}
+
+/* ====== INPUTS ====== */
+.form-control {
+    border: 1px solid var(--primary);
+    background: white;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 4px rgba(10, 102, 194, 0.4);
+}
+
+/* ====== SEARCH BAR ====== */
+.search-box input {
+    background: white;
+    border: 1px solid var(--primary);
+}
+
+/* VIEW BUTTON */
+.btn-view {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.btn-view:hover {
+    opacity: 0.9;
+}
+
+/* EDIT BUTTON */
+.btn-edit {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.btn-edit:hover {
+    opacity: 0.9;
+}
+
+/* ADD BUTTON */
+.btn-add {
+    background-color: #0A66C2; /* LinkedIn Blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.btn-add:hover {
+    opacity: 0.9;
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+    background-color: #E53935;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.btn-delete:hover {
+    opacity: 0.9;
+}
