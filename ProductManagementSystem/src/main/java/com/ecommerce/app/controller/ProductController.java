@@ -3,13 +3,13 @@ package com.ecommerce.app.controller;
 import com.ecommerce.app.model.Product;
 import com.ecommerce.app.model.ProductDetails;
 import com.ecommerce.app.service.ProductService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -51,6 +51,15 @@ public class ProductController {
         if (product.getProductDetails() != null) {
             product.getProductDetails().setProduct(product);
         }
+
+        ProductDetails details = product.getProductDetails();
+
+        if (details == null) {
+            details = new ProductDetails();
+            product.setProductDetails(details);
+        }
+
+        details.setProduct(product);
 
         productService.saveProduct(product);
 

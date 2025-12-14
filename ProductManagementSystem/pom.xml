@@ -82,7 +82,7 @@
       <dependency>
           <groupId>org.hibernate.validator</groupId>
           <artifactId>hibernate-validator</artifactId>
-          <version>8.0.1.Final</version>
+          <version>6.2.5.Final</version>
       </dependency>
 
       <!-- MYSQL Dependencies -->
@@ -111,13 +111,6 @@
           <groupId>jstl</groupId>
           <artifactId>jstl</artifactId>
           <version>${jstl-version}</version>
-      </dependency>
-
-      <!-- Jakarta Bean Validation API (often brought transitively; add only if needed) -->
-      <dependency>
-          <groupId>jakarta.validation</groupId>
-          <artifactId>jakarta.validation-api</artifactId>
-          <version>3.0.2</version>
       </dependency>
 
       <dependency>

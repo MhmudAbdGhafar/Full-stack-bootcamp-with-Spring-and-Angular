@@ -2,6 +2,7 @@ package com.ecommerce.app.service;
 
 import com.ecommerce.app.dao.ProductDAO;
 import com.ecommerce.app.model.Product;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,13 +27,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Product product) {
-        // Optional: Add backend validation logic here
         productDAO.saveProduct(product);
     }
 
     @Override
     public void updateProduct(Product product) {
-        // Optional: Add backend validation logic here
         productDAO.updateProduct(product);
     }
 
@@ -40,6 +39,8 @@ public class ProductServiceImpl implements ProductService {
     public Product getProduct(int id) {
 
         Product product = productDAO.findById(id);
+
+        Hibernate.initialize(product.getProductDetails());
 
         return productDAO.findById(id);
     }
