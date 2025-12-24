@@ -1,0 +1,25 @@
+/* Full screen centering */
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #f5f7fa;
+}
+
+.home-wrapper {
+    display: flex;
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* horizontal center */
+    height: 100%;
+    text-align: center;
+    flex-direction: column;   /* stack elements vertically */
+}
+
+.home-wrapper h2, .home-wrapper h4 {
+    margin-bottom: 20px;
+}
+
+.home-wrapper a.btn-info, .home-wrapper input.btn-danger {
+    margin: 5px;
+    padding: 10px 25px;
+    font-size: 16px;
+}
