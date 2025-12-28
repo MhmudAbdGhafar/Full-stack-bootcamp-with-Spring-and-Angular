@@ -1,0 +1,45 @@
+/* Full screen centering */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f7fa;
+}
+
+/* Wider container */
+.login-container {
+    width: 100%;
+    max-width: 720px;   /* ⬅ increase width */
+    padding: 20px;
+}
+
+/* Card look */
+.login-panel {
+    border-radius: 8px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* More breathing room inside */
+.login-panel .panel-body {
+    padding: 40px;
+}
+
+.form-control {
+    height: 50px;
+    font-size: 16px;
+}
+
+.btn-lg {
+    height: 52px;
+    font-size: 18px;
+}
+
+.login-panel hr {
+    margin: 25px 0;
+}
+
+.login-panel .btn-primary {
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
