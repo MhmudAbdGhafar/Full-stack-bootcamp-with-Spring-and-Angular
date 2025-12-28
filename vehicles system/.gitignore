@@ -1,33 +1,68 @@
-### IntelliJ IDEA ###
+############################
+# Maven build output
+############################
+target/
+*.war
+*.jar
+*.ear
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iml
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
 
-### Eclipse ###
-.apt_generated
+############################
+# Eclipse / STS files
+############################
 .classpath
-.factorypath
 .project
-.settings
+.settings/
+.factorypath
 .springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+.apt_generated/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+############################
+# SmartTomcat (ignore)
+############################
+.smarttomcat/
 
-### VS Code ###
-.vscode/
+############################
+# Logs
+############################
+*.log
 
-### Mac OS ###
+############################
+# System files
+############################
 .DS_Store
+Thumbs.db
 
-/libs/
-/.idea/
+############################
+# Node modules (if ever used)
+############################
+node_modules/
+
+############################
+# Temporary / backup files
+############################
+*.tmp
+*.temp
+*.swp
+*~
+*.bak
+
+############################
+# Generated Maven dirs
+############################
+maven-status/
+maven-archiver/
+generated-sources/
+generated-test-sources/
+
+############################
+# Environment / secrets
+############################
+.env
+*.properties~
