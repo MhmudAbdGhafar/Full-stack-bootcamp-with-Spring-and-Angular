@@ -10,10 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -65,6 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 log.debug("User - {}", userDetails);
 
+                /*
                 UsernamePasswordAuthenticationToken authToken;
                 authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -78,6 +78,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 context.setAuthentication(authToken);
 
                 SecurityContextHolder.setContext(context);
+                */
+
+
+                Authentication authToken;
+                authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
+                );
+
+                SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
 
