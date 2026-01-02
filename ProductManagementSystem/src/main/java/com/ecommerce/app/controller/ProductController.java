@@ -1,7 +1,7 @@
 package com.ecommerce.app.controller;
 
-import com.ecommerce.app.model.Product;
-import com.ecommerce.app.model.ProductDetails;
+import com.ecommerce.app.dto.ProductDTO;
+import com.ecommerce.app.dto.ProductDetailsDTO;
 import com.ecommerce.app.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,10 +38,10 @@ public class ProductController {
     @ApiOperation("Show add product page")
     public String addProduct(Model model) {
 
-        Product product = new Product();
-        product.setProductDetails(new ProductDetails());
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setProductDetails(new ProductDetailsDTO());
 
-        model.addAttribute("product", product);
+        model.addAttribute("product", productDTO);
 
         return "products/add";
     }
@@ -49,14 +49,14 @@ public class ProductController {
     @PostMapping("/product")
     @ApiOperation("Add new product")
     public String addProduct(
-            @Valid @ModelAttribute("product") Product product,
+            @Valid @ModelAttribute("product") ProductDTO productDTO,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "products/add";
         }
 
-        productService.saveProduct(product);
+        productService.saveProduct(productDTO);
 
         return "redirect:/products";
     }
@@ -74,9 +74,9 @@ public class ProductController {
     @ApiOperation("Show update product page")
     public String updateProduct(Model model, @PathVariable int id) {
 
-        Product product = productService.getProduct(id);
+        ProductDTO productDTO = productService.getProduct(id);
 
-        model.addAttribute("product", product);
+        model.addAttribute("product", productDTO);
 
         return "products/edit";
     }
@@ -84,19 +84,19 @@ public class ProductController {
     @PostMapping("/update")
     @ApiOperation("Update existing product")
     public String updateProduct(
-            @Valid @ModelAttribute("product") Product product,
+            @Valid @ModelAttribute("product") ProductDTO productDTO,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "products/edit";
         }
 
-        productService.updateProduct(product);
+        productService.updateProduct(productDTO);
 
         return "redirect:/products";
     }
 
-    @DeleteMapping("/product/{id}")
+    @GetMapping("/delete/{id}")
     @ApiOperation("Delete existing product")
     public String deleteProduct(@PathVariable int id) {
 
@@ -111,7 +111,7 @@ public class ProductController {
             @RequestParam(name = "keyword") String keyword,
             Model model) {
 
-        List<Product> results = productService.searchProducts(keyword);
+        List<ProductDTO> results = productService.searchProducts(keyword);
         model.addAttribute("products", results);
         model.addAttribute("keyword", keyword);
 

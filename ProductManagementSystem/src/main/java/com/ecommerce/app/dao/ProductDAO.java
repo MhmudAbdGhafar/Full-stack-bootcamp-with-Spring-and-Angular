@@ -1,21 +1,21 @@
 package com.ecommerce.app.dao;
 
-import com.ecommerce.app.model.Product;
+import com.ecommerce.app.entity.Product;
 
 import java.util.List;
 
 public interface ProductDAO {
 
-    List<Product> listProducts();
-
-    void saveProduct(Product product);
-
-    void updateProduct(Product product);
+    List<Product> findAll();
 
     Product findById(int id);
 
-    void deleteProduct(int id);
+    void save(Product product);
 
-    List<Product> searchProductsByName(String keyword);
+    void update(Product product);
+
+    void delete(int id);
+
+    List<Product> search(String keyword);
 
 }

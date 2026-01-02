@@ -1,20 +1,20 @@
 package com.ecommerce.app.service;
 
-import com.ecommerce.app.model.Product;
+import com.ecommerce.app.dto.ProductDTO;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts();
+    List<ProductDTO> getProducts();
 
-    void saveProduct(Product product);
+    ProductDTO getProduct(int id);
 
-    void updateProduct(Product product);
+    void saveProduct(ProductDTO productDTO);
 
-    Product getProduct(int id);
+    void updateProduct(ProductDTO productDTO);
 
     void deleteProduct(int id);
 
-    List<Product> searchProducts(String keyword);
+    List<ProductDTO> searchProducts(String keyword);
 }

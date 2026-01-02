@@ -1,14 +1,16 @@
 package com.ecommerce.app.service;
 
 import com.ecommerce.app.dao.ProductDAO;
-import com.ecommerce.app.model.Product;
-import com.ecommerce.app.model.ProductDetails;
-import org.hibernate.Hibernate;
+import com.ecommerce.app.dto.ProductDTO;
+import com.ecommerce.app.entity.Product;
+import com.ecommerce.app.entity.ProductDetails;
+import com.ecommerce.app.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -22,63 +24,73 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts() {
-        return productDAO.listProducts();
+    public List<ProductDTO> getProducts() {
+        return productDAO.findAll()
+                .stream()
+                .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void saveProduct(Product product) {
-
-        ProductDetails details = product.getProductDetails();
-
-        if (details == null) {
-            details = new ProductDetails();
-        }
-
-        product.setProductDetails(details);
-        product.getProductDetails().setProduct(product);
-
-        productDAO.saveProduct(product);
-    }
-
-    @Override
-    public void updateProduct(Product product) {
-
-        ProductDetails details = product.getProductDetails();
-
-        if (details == null) {
-            details = new ProductDetails();
-        }
-
-        product.setProductDetails(details);
-        product.getProductDetails().setProduct(product);
-
-        productDAO.updateProduct(product);
-    }
-
-    @Override
-    public Product getProduct(int id) {
+    public ProductDTO getProduct(int id) {
 
         Product product = productDAO.findById(id);
 
-        Hibernate.initialize(product.getProductDetails());
+        return ProductMapper.toDTO(product);
+    }
 
-        return product;
+    @Override
+    public void saveProduct(ProductDTO productDTO) {
+
+        Product product = ProductMapper.toEntity(productDTO);
+
+        ProductDetails details = product.getProductDetails();
+
+        if (details == null) {
+            details = new ProductDetails();
+        }
+
+        product.setProductDetails(details);
+        product.getProductDetails().setProduct(product);
+
+        productDAO.save(product);
+    }
+
+    @Override
+    public void updateProduct(ProductDTO productDTO) {
+
+        Product product = ProductMapper.toEntity(productDTO);
+
+        ProductDetails details = product.getProductDetails();
+
+        if (details == null) {
+            details = new ProductDetails();
+        }
+
+        product.setProductDetails(details);
+        product.getProductDetails().setProduct(product);
+
+        productDAO.update(product);
     }
 
     @Override
     public void deleteProduct(int id) {
-        productDAO.deleteProduct(id);
+        productDAO.delete(id);
     }
 
     @Override
-    public List<Product> searchProducts(String keyword) {
+    public List<ProductDTO> searchProducts(String keyword) {
 
         if (keyword == null || keyword.trim().isEmpty()) {
-            return productDAO.listProducts();
+            return productDAO.findAll()
+                    .stream()
+                    .map(ProductMapper::toDTO)
+                    .collect(Collectors.toList());
         }
 
-        return productDAO.searchProductsByName(keyword);
+        return productDAO.search(keyword)
+                .stream()
+                .map(ProductMapper::toDTO)
+                .collect(Collectors.toList());
     }
-
 }
