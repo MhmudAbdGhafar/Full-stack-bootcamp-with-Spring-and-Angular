@@ -2,6 +2,7 @@ package com.ecommerce.app.service;
 
 import com.ecommerce.app.dao.ProductDAO;
 import com.ecommerce.app.model.Product;
+import com.ecommerce.app.model.ProductDetails;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProduct(Product product) {
+
+        ProductDetails details = product.getProductDetails();
+
+        if (details == null) {
+            details = new ProductDetails();
+        }
+
+        product.setProductDetails(details);
+        product.getProductDetails().setProduct(product);
+
         productDAO.saveProduct(product);
     }
 
     @Override
     public void updateProduct(Product product) {
+
+        ProductDetails details = product.getProductDetails();
+
+        if (details == null) {
+            details = new ProductDetails();
+        }
+
+        product.setProductDetails(details);
+        product.getProductDetails().setProduct(product);
+
         productDAO.updateProduct(product);
     }
 
@@ -42,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 
         Hibernate.initialize(product.getProductDetails());
 
-        return productDAO.findById(id);
+        return product;
     }
 
     @Override
