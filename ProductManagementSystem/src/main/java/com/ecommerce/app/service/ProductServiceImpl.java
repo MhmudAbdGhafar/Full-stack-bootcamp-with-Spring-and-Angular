@@ -59,16 +59,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(ProductDTO productDTO) {
 
-        Product product = ProductMapper.toEntity(productDTO);
+        Product existingProduct = productDAO.findById(productDTO.getId());
 
-        ProductDetails details = product.getProductDetails();
-
-        if (details == null) {
-            details = new ProductDetails();
-        }
-
-        product.setProductDetails(details);
-        product.getProductDetails().setProduct(product);
+        Product product = ProductMapper.updateEntity(existingProduct, productDTO);
 
         productDAO.update(product);
     }
