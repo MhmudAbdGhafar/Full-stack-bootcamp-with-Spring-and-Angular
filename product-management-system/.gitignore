@@ -1,0 +1,68 @@
+############################
+# Maven build output
+############################
+target/
+*.war
+*.jar
+*.ear
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iml
+out/
+
+############################
+# Eclipse / STS files
+############################
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+.apt_generated/
+
+############################
+# SmartTomcat (ignore)
+############################
+.smarttomcat/
+
+############################
+# Logs
+############################
+*.log
+
+############################
+# System files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# Node modules (if ever used)
+############################
+node_modules/
+
+############################
+# Temporary / backup files
+############################
+*.tmp
+*.temp
+*.swp
+*~
+*.bak
+
+############################
+# Generated Maven dirs
+############################
+maven-status/
+maven-archiver/
+generated-sources/
+generated-test-sources/
+
+############################
+# Environment / secrets
+############################
+.env
+*.properties~
